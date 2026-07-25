@@ -1,0 +1,408 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 240 33% 2%;
+    --foreground: 0 0% 98%;
+    --card: 240 15% 6%;
+    --card-foreground: 0 0% 95%;
+    --popover: 240 15% 6%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 240 20% 3%;
+    --secondary: 240 10% 12%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 240 10% 12%;
+    --muted-foreground: 240 5% 55%;
+    --accent: 240 10% 12%;
+    --accent-foreground: 0 0% 95%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 10% 10%;
+    --input: 240 10% 10%;
+    --ring: 270 60% 60%;
+    --radius: 1.1rem;
+
+    /* Brand tokens — unveilr eye palette */
+    --brand-cyan: #00E5FF;
+    --brand-blue: #2F6BFF;
+    --brand-lime: #A8F046;
+    --brand-teal: #0FB5AC;
+    --brand-navy: #050524;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html, body, #root {
+    min-height: 100%;
+  }
+
+  html {
+    @apply scroll-smooth;
+    overscroll-behavior-y: none;
+    overflow-x: hidden;
+  }
+
+  body {
+    margin: 0;
+    @apply bg-background text-[hsl(var(--foreground))] font-inter overflow-x-hidden antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-outfit tracking-tight;
+  }
+
+  #root {
+    min-height: 100vh;
+    width: 100%;
+    isolation: isolate;
+  }
+
+  ::selection {
+    background: rgba(47, 107, 255, 0.3);
+    color: #fff;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+   ═══════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════
+   GRADIENT TEXT
+   ═══════════════════════════════════════════ */
+.gradient-text {
+  @apply bg-clip-text text-transparent;
+  /* echoes the unveilr iris: lime → cyan → electric blue */
+  background-image: linear-gradient(110deg, #A8F046 0%, #00E5FF 42%, #2F6BFF 100%);
+  background-size: 200% auto;
+  animation: gradient-shift 8s ease infinite;
+}
+
+.gradient-text-static {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(110deg, #00E5FF, #2F6BFF);
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* Soft white-to-grey "premium" headline */
+.text-balance { text-wrap: balance; }
+
+/* ═══════════════════════════════════════════
+   AURORA / MESH BACKGROUND BLOBS
+   ═══════════════════════════════════════════ */
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.nebula-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(130px);
+  pointer-events: none;
+  animation: nebula-pulse 12s ease-in-out infinite;
+}
+
+@keyframes nebula-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1) translate(0px, 0px); }
+  50% { opacity: 0.85; transform: scale(1.08) translate(15px, -15px); }
+}
+
+.ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+}
+
+/* Faint dotted / grid backdrop */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.bg-grid-fade {
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 75%);
+}
+
+.bg-dots {
+  background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Subtle film grain overlay */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ═══════════════════════════════════════════
+   GLASS PANELS
+   ═══════════════════════════════════════════ */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.018);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-4px);
+  box-shadow:
+    0 18px 40px -12px rgba(0, 0, 0, 0.6),
+    0 0 34px -6px rgba(47, 107, 255, 0.18),
+    0 0 60px -18px rgba(0, 229, 255, 0.12);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* On touch devices, re-blurring the moving backdrop behind every glass
+   surface during scroll is the main source of jank. Drop the live blur
+   and use a slightly more opaque fill instead — visually near-identical,
+   dramatically cheaper. */
+@media (hover: none), (pointer: coarse) {
+  .glass-card,
+  .glass-panel {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(11, 12, 28, 0.6);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   GRADIENT BORDER (animated)
+   ═══════════════════════════════════════════ */
+.gradient-border {
+  position: relative;
+  /* note: do NOT set border-radius here — let the rounded-* utility win.
+     The ::before inherits the element's computed radius below. */
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(0,229,255,0.5), rgba(47, 107, 255,0.5), rgba(0,229,255,0.1));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.gradient-border:hover::before { opacity: 1; }
+
+/* ═══════════════════════════════════════════
+   SPOTLIGHT (follows cursor via --mx/--my)
+   ═══════════════════════════════════════════ */
+.spotlight {
+  position: relative;
+  overflow: hidden;
+}
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    320px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(47, 107, 255, 0.16),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+.spotlight:hover::before { opacity: 1; }
+
+/* ═══════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════ */
+.btn-primary {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(120deg, #00E5FF, #2F6BFF);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08) inset,
+              0 10px 30px -8px rgba(47, 107, 255, 0.5),
+              0 0 40px -10px rgba(0, 229, 255, 0.35);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.12) inset,
+              0 16px 40px -8px rgba(47, 107, 255, 0.6),
+              0 0 60px -10px rgba(0, 229, 255, 0.45);
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: translateX(-150%) skewX(-20deg);
+  opacity: 0;
+}
+.btn-primary:hover::after {
+  animation: shine 1s ease;
+  opacity: 1;
+}
+@keyframes shine {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  100% { transform: translateX(260%) skewX(-20deg); }
+}
+
+.btn-ghost {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.2);
+}
+
+/* Pill badge */
+.pill-badge {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+}
+
+/* ═══════════════════════════════════════════
+   MARQUEE
+   ═══════════════════════════════════════════ */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* ═══════════════════════════════════════════
+   CRYSTAL VISUAL (legacy support)
+   ═══════════════════════════════════════════ */
+@keyframes crystal-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-12px) rotate(1deg); }
+  66% { transform: translateY(6px) rotate(-1deg); }
+}
+@keyframes crystal-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+@keyframes crystal-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.crystal-ring {
+  position: absolute;
+  inset: 20px;
+  border: 1px solid rgba(6,182,212,0.15);
+  border-radius: 50%;
+  animation: crystal-rotate 20s linear infinite;
+}
+.crystal-ring::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: #06b6d4;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #06b6d4, 0 0 24px rgba(6,182,212,0.5);
+}
+.crystal-ring-outer {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(47, 107, 255,0.1);
+  border-radius: 50%;
+  animation: crystal-rotate 30s linear infinite reverse;
+}
+.crystal-ring-outer::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: #2F6BFF;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #2F6BFF, 0 0 24px rgba(47, 107, 255,0.5);
+}
+
+.text-glow {
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+/* ═══════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════ */
+::-webkit-scrollbar { width: 9px; }
+::-webkit-scrollbar-track { background: #05050A; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(0,229,255,0.25), rgba(47, 107, 255,0.25));
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(0,229,255,0.45), rgba(47, 107, 255,0.45));
+}
