@@ -4,6 +4,7 @@ import ScrollProgress from '../components/motion/ScrollProgress';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import LogoMarquee from '../components/LogoMarquee';
+import Products from '../components/Products';
 import Features from '../components/Features';
 import ProductShowcase from '../components/ProductShowcase';
 import HowItWorks from '../components/HowItWorks';
@@ -26,6 +27,7 @@ const Index: React.FC = () => {
           <main>
             <HeroSection />
             <LogoMarquee />
+            <Products />
             <Features />
             <ProductShowcase />
             <HowItWorks />

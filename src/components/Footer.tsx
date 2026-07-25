@@ -6,21 +6,21 @@ import { useDemoPanel } from './demo/DemoPanelContext';
 
 const columns = [
   {
-    heading: 'Product',
+    heading: 'Platforms',
     links: [
-      { label: 'Platform', href: '#features' },
+      { label: 'Unveilr XSPM', href: '#products' },
+      { label: 'Unveilr Guard', href: '#products' },
       { label: 'How it works', href: '#how-it-works' },
       { label: 'Pricing', href: '#pricing' },
-      { label: 'Customers', href: '#customers' },
     ],
   },
   {
-    heading: 'Solutions',
+    heading: 'Guard',
     links: [
-      { label: 'CSPM', href: '#features' },
-      { label: 'CNAPP', href: '#features' },
-      { label: 'DSPM', href: '#features' },
-      { label: 'KSPM', href: '#features' },
+      { label: 'AI-BOM discovery', href: '#products' },
+      { label: 'MCP gateway', href: '#products' },
+      { label: 'Evidence ledger', href: '#products' },
+      { label: 'Console', href: 'https://guard.unveilr.ai' },
     ],
   },
 ];
@@ -39,8 +39,8 @@ const Footer: React.FC = () => {
               <span className="text-[18px] font-outfit font-bold tracking-tight text-white lowercase">unveilr</span>
             </div>
             <p className="text-sm text-gray-500 leading-relaxed max-w-xs">
-              Extended Security Posture Management. Unified security intelligence
-              from code to cloud.
+              Two platforms, one Unveilr. XSPM reduces exploitable risk from code
+              to cloud — and Guard governs and proves the risk of your AI agents.
             </p>
             <button
               onClick={open}
@@ -55,13 +55,20 @@ const Footer: React.FC = () => {
             <div key={col.heading}>
               <h4 className="text-xs font-semibold uppercase tracking-wider text-white mb-4">{col.heading}</h4>
               <ul className="space-y-2.5">
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    <a href={l.href} className="text-sm text-gray-500 hover:text-white transition-colors">
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
+                {col.links.map((l) => {
+                  const external = l.href.startsWith('http');
+                  return (
+                    <li key={l.label}>
+                      <a
+                        href={l.href}
+                        {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                        className="text-sm text-gray-500 hover:text-white transition-colors"
+                      >
+                        {l.label}
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

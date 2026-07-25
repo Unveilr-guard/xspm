@@ -47,7 +47,7 @@ const HeroSection: React.FC = () => {
           {/* ── Left: copy ── */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             <motion.a
-              href="#features"
+              href="#products"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease }}
@@ -58,14 +58,14 @@ const HeroSection: React.FC = () => {
                   <span className="absolute inline-flex h-full w-full rounded-full bg-[#A8F046] opacity-70 animate-ping" />
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#A8F046]" />
                 </span>
-                Beta
+                New
               </span>
-              AI-powered remediation
+              Introducing Unveilr Guard
               <ArrowRight className="h-3.5 w-3.5 text-gray-500 transition-transform group-hover:translate-x-0.5" />
             </motion.a>
 
             <h1 className="font-outfit font-black tracking-tight text-white leading-[1.0] text-[clamp(2.5rem,5.5vw,4.5rem)] mb-7">
-              {['Unveil and Reduce', 'Exploitable Risk'].map((line, i) => (
+              {['Secure everything', 'you build —'].map((line, i) => (
                 <motion.span
                   key={line}
                   className="block"
@@ -82,7 +82,7 @@ const HeroSection: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease, delay: 0.26 }}
               >
-                from Code to Cloud.
+                and every AI agent you run.
               </motion.span>
             </h1>
 
@@ -92,9 +92,10 @@ const HeroSection: React.FC = () => {
               transition={{ duration: 0.7, ease, delay: 0.36 }}
               className="text-[17px] md:text-[19px] text-gray-400 font-light leading-relaxed mb-9 max-w-[560px]"
             >
-              Unveilr connects source code, IaC, cloud posture, containers and
-              attack paths — so your team fixes what's reachable, exploitable,
-              and worth fixing now.
+              Two platforms from Unveilr. <span className="text-gray-200 font-normal">XSPM</span> reduces
+              exploitable risk from code to cloud. <span className="text-gray-200 font-normal">Guard</span> discovers,
+              governs and proves the risk of the AI agents now running in
+              production.
             </motion.p>
 
             <motion.div
@@ -127,7 +128,7 @@ const HeroSection: React.FC = () => {
             >
               {[
                 { icon: ShieldCheck, label: 'SOC 2 Type II' },
-                { icon: GitBranch, label: 'Code to cloud' },
+                { icon: GitBranch, label: 'Code · Cloud · AI' },
                 { icon: Cloud, label: 'AWS · Azure · GCP' },
               ].map(({ icon: Icon, label }) => (
                 <span key={label} className="inline-flex items-center gap-2">
@@ -172,9 +173,9 @@ const HeroSection: React.FC = () => {
               <FloatingChip
                 className="left-[2%] bottom-[10%]"
                 delay={1.2}
-                title="Scanners unified"
-                value="5+"
-                accent="#2F6BFF"
+                title="AI agents governed"
+                value="100%"
+                accent="#A8F046"
               />
             </motion.div>
           </div>
