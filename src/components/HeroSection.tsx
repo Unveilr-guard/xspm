@@ -92,8 +92,10 @@ const HeroSection: React.FC = () => {
               transition={{ duration: 0.7, ease, delay: 0.36 }}
               className="text-[17px] md:text-[19px] text-gray-400 font-light leading-relaxed mb-9 max-w-[560px]"
             >
-              Two platforms from Unveilr. <span className="text-gray-200 font-normal">XSPM</span> reduces
-              exploitable risk from code to cloud. <span className="text-gray-200 font-normal">Guard</span> discovers,
+              Two products from Unveilr.{' '}
+              <span className="text-gray-200 font-normal">Vulnerability Risk Platform</span> reduces
+              exploitable risk from code to cloud.{' '}
+              <span className="text-gray-200 font-normal">Guard</span> discovers,
               governs and proves the risk of the AI agents now running in
               production.
             </motion.p>

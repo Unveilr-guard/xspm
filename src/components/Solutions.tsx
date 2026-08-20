@@ -1,140 +1,301 @@
 import React from 'react';
-import { Code, Cloud, GitBranch, ShieldCheck, Zap, Users } from 'lucide-react';
+import {
+  Code2,
+  Boxes,
+  Cloud,
+  Layers,
+  Workflow,
+  GitPullRequest,
+  GitBranch,
+  Search,
+  Bot,
+  ShieldCheck,
+  Network,
+  Landmark,
+  KeyRound,
+  FileCheck2,
+  Scale,
+  ScanLine,
+} from 'lucide-react';
+import { StaggerGroup, StaggerItem } from './motion/Reveal';
+import Reveal from './motion/Reveal';
+import SpotlightCard from './motion/SpotlightCard';
 
-const Solutions: React.FC = () => {
-  const solutions = [
-    {
-      anchor: "solution-devsecops",
-      title: "DevSecOps Integration",
-      description: "Integrate security seamlessly into your development workflows. Automated security checks throughout your pipeline.",
-      icon: GitBranch,
-      features: ["Pipeline integration", "Automated scanning", "Early detection", "Continuous monitoring"],
-      colorClass: "from-unveilr-blue to-unveilr-cyan"
-    },
-    {
-      anchor: "solution-multi-cloud",
-      title: "Multi-Cloud Security",
-      description: "Unified security management across all your cloud environments. Single platform for comprehensive visibility.",
-      icon: Cloud,
-      features: ["Multi-cloud visibility", "Unified dashboard", "Centralized management", "Cross-cloud insights"],
-      colorClass: "from-unveilr-purple to-unveilr-blue"
-    },
-    {
-      anchor: "solution-appsec",
-      title: "Application Security",
-      description: "Comprehensive protection for your applications throughout the development lifecycle and runtime.",
-      icon: Code,
-      features: ["Code analysis", "Dependency scanning", "Runtime protection", "API security"],
-      colorClass: "from-unveilr-cyan to-unveilr-purple"
-    },
-    {
-      anchor: "solution-container",
-      title: "Container & Kubernetes",
-      description: "Secure your containerized workloads and Kubernetes infrastructure with comprehensive protection.",
-      icon: ShieldCheck,
-      features: ["Image security", "Runtime protection", "Policy enforcement", "Continuous monitoring"],
-      colorClass: "from-unveilr-purple to-unveilr-cyan"
-    },
-    {
-      anchor: "solution-threat",
-      title: "Threat Intelligence",
-      description: "Advanced threat analysis and correlation to understand risks across your entire infrastructure.",
-      icon: Zap,
-      features: ["Risk visualization", "Threat correlation", "Prioritization", "Actionable insights"],
-      colorClass: "from-unveilr-blue to-unveilr-purple"
-    },
-    {
-      anchor: "solution-compliance",
-      title: "Compliance & Governance",
-      description: "Streamlined compliance management across multiple frameworks with automated tracking and reporting.",
-      icon: Users,
-      features: ["Framework support", "Automated tracking", "Compliance reporting", "Policy management"],
-      colorClass: "from-unveilr-cyan to-unveilr-blue"
-    }
-  ];
+type Solution = {
+  id: string;
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+  features: string[];
+};
+
+const vrpSolutions: Solution[] = [
+  {
+    id: 'vrp-appsec',
+    icon: Code2,
+    title: 'Application security',
+    description:
+      'SAST, SCA, secrets and dependency scanning unified across every repo — one findings view instead of five scanners.',
+    features: ['SAST & SCA', 'Secrets detection', 'Dependency risk', 'Repo-wide coverage'],
+  },
+  {
+    id: 'vrp-iac',
+    icon: Boxes,
+    title: 'Infrastructure as code',
+    description:
+      'Terraform, CloudFormation and Kubernetes manifests checked in context — before misconfig ships to production.',
+    features: ['Terraform', 'CloudFormation', 'K8s manifests', 'Policy as code'],
+  },
+  {
+    id: 'vrp-cspm',
+    icon: Cloud,
+    title: 'Cloud posture (CSPM)',
+    description:
+      'Continuous posture across AWS, Azure and GCP with drift detection and prioritized misconfigurations.',
+    features: ['AWS · Azure · GCP', 'Drift detection', 'Misconfig triage', 'Unified dashboard'],
+  },
+  {
+    id: 'vrp-containers',
+    icon: ScanLine,
+    title: 'Containers & Kubernetes',
+    description:
+      'Image scanning, runtime signals and K8s posture correlated with the rest of your attack surface.',
+    features: ['Image scanning', 'KSPM', 'Runtime signals', 'Workload context'],
+  },
+  {
+    id: 'vrp-attack-paths',
+    icon: Workflow,
+    title: 'Attack-path intelligence',
+    description:
+      'Trace how a finding in code becomes a breach in production — ranked by reachability and blast radius.',
+    features: ['Reachability', 'Blast radius', 'Path graphs', 'Priority ranking'],
+  },
+  {
+    id: 'vrp-remediation',
+    icon: GitPullRequest,
+    title: 'AI remediation',
+    description:
+      'Context-aware fixes drafted as reviewable pull requests — review, approve, ship.',
+    features: ['AI-drafted PRs', 'Code & IaC fixes', 'Reviewable diffs', 'Credit pools'],
+  },
+  {
+    id: 'vrp-devsecops',
+    icon: GitBranch,
+    title: 'DevSecOps workflows',
+    description:
+      'Frictionless CI/CD and ticketing hooks so security lands where developers already work.',
+    features: ['GitHub · GitLab', 'CI gates', 'Jira workflows', 'Self-serve onboarding'],
+  },
+  {
+    id: 'vrp-cnapp',
+    icon: Layers,
+    title: 'CNAPP-ready coverage',
+    description:
+      'Code, cloud, containers and posture in one correlated surface — without buying five point products.',
+    features: ['CSPM · CNAPP', 'KSPM · DSPM signals', 'Deduplicated findings', 'One console'],
+  },
+];
+
+const guardSolutions: Solution[] = [
+  {
+    id: 'guard-aibom',
+    icon: Search,
+    title: 'AI-BOM discovery',
+    description:
+      'Deterministic scanners build an AI bill of materials per repo — models, MCP servers, agents, prompts and keys.',
+    features: ['Models & agents', 'MCP servers', 'Prompts & keys', 'Per-repo AI-BOM'],
+  },
+  {
+    id: 'guard-shadow',
+    icon: Bot,
+    title: 'Shadow AI inventory',
+    description:
+      'Surface unapproved AI usage plus cloud agent fleets — AWS AgentCore, Foundry and coding-agent surfaces.',
+    features: ['Shadow AI', 'Cloud agents', 'Claude Code · Cursor', 'Hooks & skills'],
+  },
+  {
+    id: 'guard-blast',
+    icon: ShieldCheck,
+    title: 'Blast-radius scoring',
+    description:
+      'Every finding scored by severity × real exposure — reachable, runtime-active, gate-open.',
+    features: ['Exposure scoring', 'Continuous re-score', 'Reachability', 'Prioritized backlog'],
+  },
+  {
+    id: 'guard-ci',
+    icon: GitPullRequest,
+    title: 'PR checks & CI gates',
+    description:
+      'Block risky AI changes in review and pipeline, with AI-drafted remediation PRs when something slips through.',
+    features: ['PR checks', 'CI gates', 'Remediation PRs', 'Fail-closed options'],
+  },
+  {
+    id: 'guard-mcp',
+    icon: Network,
+    title: 'MCP gateway',
+    description:
+      'Proxy agent tool calls at runtime — agents only take allowed actions, with every decision sealed.',
+    features: ['Tool-call proxy', 'Runtime allowlists', 'Destructive-action holds', 'Verifiable decisions'],
+  },
+  {
+    id: 'guard-identity',
+    icon: KeyRound,
+    title: 'Agent identity gate',
+    description:
+      'Register AI agents as identities before deploy — own tokens or external IdPs like Okta and Entra.',
+    features: ['Agent identities', 'Deployment gate', 'Okta · Entra', 'Scoped tokens'],
+  },
+  {
+    id: 'guard-policy',
+    icon: Landmark,
+    title: 'Policy packs & approval',
+    description:
+      'Tenant policy packs with fail-closed scopes and human approval on destructive agent actions.',
+    features: ['Policy packs', 'Fail-closed scopes', 'Human-in-the-loop', 'Tenant controls'],
+  },
+  {
+    id: 'guard-prove',
+    icon: FileCheck2,
+    title: 'Evidence ledger',
+    description:
+      'Hash-chained, tamper-evident ledger sealing every decision — with ruleSetHash for audit trails.',
+    features: ['Hash-chained ledger', 'Tamper-evident', 'ruleSetHash', 'Decision receipts'],
+  },
+  {
+    id: 'guard-compliance',
+    icon: Scale,
+    title: 'AI compliance packs',
+    description:
+      'EU AI Act and SOC 2 evidence packs plus CycloneDX ML-BOM export for auditors and GRC teams.',
+    features: ['EU AI Act', 'SOC 2 mappings', 'CycloneDX ML-BOM', 'Evidence packs'],
+  },
+];
+
+const SolutionCard: React.FC<{
+  solution: Solution;
+  accent: 'cyan' | 'lime';
+}> = ({ solution, accent }) => {
+  const Icon = solution.icon;
+  const accentClasses =
+    accent === 'cyan'
+      ? {
+          iconWrap: 'bg-[#00E5FF]/12 border-[#00E5FF]/20',
+          icon: 'text-[#00E5FF]',
+          dot: 'bg-[#00E5FF]',
+        }
+      : {
+          iconWrap: 'bg-[#A8F046]/12 border-[#A8F046]/20',
+          icon: 'text-[#A8F046]',
+          dot: 'bg-[#A8F046]',
+        };
 
   return (
-    <section id="solutions" className="py-24 relative scroll-mt-28 md:scroll-mt-32">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-          <span className="inline-block py-1 px-3 rounded-full bg-unveilr-blue/10 border border-unveilr-blue/30 text-unveilr-blue text-sm font-medium mb-4">
-            Solutions for Every Team
-          </span>
-          
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 reveal font-orbitron">
-            Security Solutions That Fit Your Workflow
-          </h2>
-          
-          <p className="text-xl text-gray-300 reveal" style={{ transitionDelay: '0.1s' }}>
-            Unveilr XSPM provides tailored solutions for development, operations, security, and compliance teams.
-          </p>
-        </div>
+    <StaggerItem>
+      <SpotlightCard
+        tilt
+        id={solution.id}
+        className="group h-full gradient-border glass-card rounded-[2rem] p-7 md:p-8 flex flex-col scroll-mt-28"
+      >
+        <span
+          className={`flex h-11 w-11 items-center justify-center rounded-2xl border mb-4 transition-transform duration-500 group-hover:scale-110 ${accentClasses.iconWrap}`}
+        >
+          <Icon className={`h-5 w-5 ${accentClasses.icon}`} />
+        </span>
+        <h3 className="text-xl font-outfit font-semibold text-white mb-2">{solution.title}</h3>
+        <p className="text-[14.5px] text-gray-400 font-light leading-relaxed mb-5">
+          {solution.description}
+        </p>
+        <ul className="mt-auto space-y-2">
+          {solution.features.map((f) => (
+            <li key={f} className="flex items-center gap-2.5 text-[13px] text-gray-400">
+              <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${accentClasses.dot}`} />
+              {f}
+            </li>
+          ))}
+        </ul>
+      </SpotlightCard>
+    </StaggerItem>
+  );
+};
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {solutions.map((solution, index) => {
-            const Icon = solution.icon;
-            return (
-              <div
-                key={index}
-                id={solution.anchor}
-                className="glass-card p-8 rounded-2xl hover:border-unveilr-blue/50 transition-all duration-300 reveal group scroll-mt-28 md:scroll-mt-32"
-                style={{ transitionDelay: `${0.1 * index}s` }}
-              >
-                <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${solution.colorClass} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <Icon className="h-8 w-8 text-white" />
-                </div>
-                
-                <h3 className="text-2xl font-bold mb-4 text-white">
-                  {solution.title}
-                </h3>
-                
-                <p className="text-gray-300 mb-6 text-lg">
-                  {solution.description}
-                </p>
-                
-                <ul className="space-y-2">
-                  {solution.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center text-gray-400 text-sm">
-                      <span className="w-1.5 h-1.5 rounded-full bg-unveilr-blue mr-3"></span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          })}
-        </div>
+const Solutions: React.FC = () => {
+  return (
+    <section id="solutions" className="relative py-28 md:py-36 scroll-mt-24">
+      <div className="absolute top-32 right-0 w-[480px] h-[480px] rounded-full bg-[#A8F046]/[0.05] blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-20 left-0 w-[420px] h-[420px] rounded-full bg-[#00E5FF]/[0.05] blur-[140px] pointer-events-none" />
 
-        {/* Integration Section */}
-        <div className="mt-20 glass-card p-8 md:p-12 rounded-[1.4rem]">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4 font-orbitron text-glow">
-              Seamless <span className="gradient-text">Integrations</span>
-            </h3>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Seamlessly integrate with your existing development tools, CI/CD pipelines, and security infrastructure.
+      <div className="container mx-auto px-6 lg:px-10 relative z-10">
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <Reveal>
+            <span className="inline-flex items-center gap-2 rounded-full pill-badge px-3 py-1 text-[12px] font-medium uppercase tracking-[0.18em] text-[#2F6BFF]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#2F6BFF] shadow-[0_0_8px_#2F6BFF]" />
+              Solutions
+            </span>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-5 text-[clamp(2rem,5vw,3.5rem)] font-outfit font-bold tracking-tight text-white leading-[1.05]">
+              Solutions across{' '}
+              <span className="gradient-text-static">both products.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-5 text-lg text-gray-400 font-light max-w-2xl mx-auto">
+              Vulnerability Risk Platform covers exploitable risk from code to
+              cloud. Unveilr Guard covers the AI agents now running in your
+              environment.
             </p>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
-            {['GitHub Actions', 'GitLab CI', 'Jenkins', 'Azure DevOps', 'Terraform', 'Kubernetes', 'Docker', 'Slack'].map((tool, idx) => (
-              <div
-                key={idx}
-                className="glass-card p-4 rounded-lg text-center hover:border-unveilr-blue/30 transition-all duration-300"
-              >
-                <p className="text-gray-300 font-medium">{tool}</p>
-              </div>
+          </Reveal>
+        </div>
+
+        {/* ── Vulnerability Risk Platform ── */}
+        <div id="solutions-vrp" className="mb-20 scroll-mt-28">
+          <Reveal>
+            <div className="flex flex-wrap items-center gap-3 mb-8">
+              <span className="inline-flex items-center gap-2 rounded-full pill-badge px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#00E5FF]">
+                Vulnerability Risk Platform
+              </span>
+              <span className="text-sm text-gray-500 font-light">
+                Code, cloud, containers & attack paths
+              </span>
+            </div>
+          </Reveal>
+          <StaggerGroup
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5"
+            stagger={0.06}
+          >
+            {vrpSolutions.map((s) => (
+              <SolutionCard key={s.id} solution={s} accent="cyan" />
             ))}
-          </div>
+          </StaggerGroup>
+        </div>
+
+        {/* ── Guard ── */}
+        <div id="solutions-guard" className="scroll-mt-28">
+          <Reveal>
+            <div className="flex flex-wrap items-center gap-3 mb-8">
+              <span className="inline-flex items-center gap-2 rounded-full pill-badge px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#A8F046]">
+                Unveilr Guard
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#A8F046]/[0.14] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[#BEF264]">
+                New
+              </span>
+              <span className="text-sm text-gray-500 font-light">
+                Enterprise AI Control Plane — Discover → Guard → Govern → Prove
+              </span>
+            </div>
+          </Reveal>
+          <StaggerGroup
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5"
+            stagger={0.06}
+          >
+            {guardSolutions.map((s) => (
+              <SolutionCard key={s.id} solution={s} accent="lime" />
+            ))}
+          </StaggerGroup>
         </div>
       </div>
-
-      {/* Background elements */}
-      <div className="absolute top-1/2 right-0 w-[25vw] h-[40vh] rounded-full bg-unveilr-blue opacity-[0.03] blur-[100px] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[20vw] h-[30vh] rounded-full bg-unveilr-purple opacity-[0.04] blur-[120px] pointer-events-none"></div>
     </section>
   );
 };
 
 export default Solutions;
-

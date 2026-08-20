@@ -6,20 +6,20 @@ import { useDemoPanel } from './demo/DemoPanelContext';
 
 const columns = [
   {
-    heading: 'Platforms',
+    heading: 'Products',
     links: [
-      { label: 'Unveilr XSPM', href: '#products' },
+      { label: 'Vulnerability Risk Platform', href: '#products' },
       { label: 'Unveilr Guard', href: '#products' },
-      { label: 'How it works', href: '#how-it-works' },
+      { label: 'Solutions', href: '#solutions' },
       { label: 'Pricing', href: '#pricing' },
     ],
   },
   {
-    heading: 'Guard',
+    heading: 'Solutions',
     links: [
-      { label: 'AI-BOM discovery', href: '#products' },
-      { label: 'MCP gateway', href: '#products' },
-      { label: 'Evidence ledger', href: '#products' },
+      { label: 'Risk Platform solutions', href: '#solutions-vrp' },
+      { label: 'Guard solutions', href: '#solutions-guard' },
+      { label: 'How it works', href: '#how-it-works' },
       { label: 'Console', href: 'https://guard.unveilr.ai' },
     ],
   },
@@ -39,8 +39,9 @@ const Footer: React.FC = () => {
               <span className="text-[18px] font-outfit font-bold tracking-tight text-white lowercase">unveilr</span>
             </div>
             <p className="text-sm text-gray-500 leading-relaxed max-w-xs">
-              Two platforms, one Unveilr. XSPM reduces exploitable risk from code
-              to cloud — and Guard governs and proves the risk of your AI agents.
+              Two products, one Unveilr. Vulnerability Risk Platform reduces
+              exploitable risk from code to cloud — and Guard governs and proves
+              the risk of your AI agents.
             </p>
             <button
               onClick={open}

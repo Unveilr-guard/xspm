@@ -5,8 +5,9 @@ import EyeMark from './brand/EyeMark';
 import { useDemoPanel } from './demo/DemoPanelContext';
 
 const navLinks = [
-  { label: 'Platforms', href: '#products', id: 'products' },
+  { label: 'Products', href: '#products', id: 'products' },
   { label: 'Capabilities', href: '#features', id: 'features' },
+  { label: 'Solutions', href: '#solutions', id: 'solutions' },
   { label: 'How it works', href: '#how-it-works', id: 'how-it-works' },
   { label: 'Pricing', href: '#pricing', id: 'pricing' },
   { label: 'Customers', href: '#customers', id: 'customers' },

@@ -6,6 +6,7 @@ import HeroSection from '../components/HeroSection';
 import LogoMarquee from '../components/LogoMarquee';
 import Products from '../components/Products';
 import Features from '../components/Features';
+import Solutions from '../components/Solutions';
 import ProductShowcase from '../components/ProductShowcase';
 import HowItWorks from '../components/HowItWorks';
 import StatsBand from '../components/StatsBand';
@@ -29,6 +30,7 @@ const Index: React.FC = () => {
             <LogoMarquee />
             <Products />
             <Features />
+            <Solutions />
             <ProductShowcase />
             <HowItWorks />
             <StatsBand />

@@ -21,7 +21,7 @@ type Pillar = {
   desc: string;
 };
 
-const xspmPillars: Pillar[] = [
+const vrpPillars: Pillar[] = [
   {
     icon: Workflow,
     title: 'Attack-path intelligence',
@@ -77,20 +77,20 @@ const Products: React.FC = () => {
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full pill-badge px-3 py-1 text-[12px] font-medium uppercase tracking-[0.18em] text-[#A8F046]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#A8F046] shadow-[0_0_8px_#A8F046]" />
-              Platforms
+              Products
             </span>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="mt-5 text-[clamp(2rem,5vw,3.5rem)] font-outfit font-bold tracking-tight text-white leading-[1.05]">
-              Two platforms.{' '}
+              Two products.{' '}
               <span className="gradient-text-static">One Unveilr.</span>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-5 text-lg text-gray-400 font-light max-w-2xl mx-auto">
-              The same deterministic engine, applied to two attack surfaces:
-              exploitable risk from code to cloud, and the fast-growing risk of
-              your AI agents.
+              Vulnerability Risk Platform reduces exploitable risk from code to
+              cloud. Unveilr Guard discovers, governs and proves the risk of your
+              AI agents.
             </p>
           </Reveal>
         </div>
@@ -100,17 +100,17 @@ const Products: React.FC = () => {
           className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto items-stretch"
           stagger={0.12}
         >
-          {/* ── Unveilr XSPM ── */}
+          {/* ── Vulnerability Risk Platform ── */}
           <StaggerItem>
             <SpotlightCard className="group relative h-full gradient-border glass-card rounded-[2rem] p-8 md:p-10 flex flex-col overflow-hidden">
               <div className="absolute -top-24 -left-16 w-[260px] h-[260px] rounded-full bg-[#00E5FF]/[0.10] blur-[90px] pointer-events-none" />
 
               <div className="relative">
                 <span className="inline-flex items-center gap-2 rounded-full pill-badge px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#00E5FF]">
-                  Extended Security Posture Management
+                  Code to cloud
                 </span>
-                <h3 className="mt-5 text-[1.9rem] font-outfit font-bold text-white leading-tight">
-                  Unveilr <span className="text-[#00E5FF]">XSPM</span>
+                <h3 className="mt-5 text-[1.65rem] md:text-[1.75rem] font-outfit font-bold text-white leading-tight">
+                  <span className="text-[#00E5FF]">Vulnerability Risk Platform</span>
                 </h3>
                 <p className="mt-3 text-[15.5px] text-gray-400 font-light leading-relaxed max-w-md">
                   Connects source code, IaC, cloud posture, containers and attack
@@ -120,7 +120,7 @@ const Products: React.FC = () => {
               </div>
 
               <ul className="relative mt-8 space-y-5">
-                {xspmPillars.map(({ icon: Icon, title, desc }) => (
+                {vrpPillars.map(({ icon: Icon, title, desc }) => (
                   <li key={title} className="flex gap-4">
                     <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/20">
                       <Icon className="h-5 w-5 text-[#00E5FF]" />
